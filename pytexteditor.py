@@ -73,13 +73,6 @@ class PyTextEditor:
         self.Button3.configure(foreground="#ffffff")
         self.Button3.configure(relief="flat")
         self.Button3.configure(text='''Exit''')
-
-        self.Label1 = tk.Label(self.top)
-        self.Label1.place(relx=0.8, rely=0.028, height=18, width=59)
-        self.Label1.configure(background="#383838")
-        self.Label1.configure(font=font9)
-        self.Label1.configure(foreground="#ffffff")
-        self.Label1.configure(text='''Font Size''')
         self.top.mainloop()
         self.top = tk.Tk
 

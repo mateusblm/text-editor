@@ -1,1 +1,1 @@
-# text-editor
+# PyTextEditor like Ubuntu(Text Editor) interface, using Tkinter!

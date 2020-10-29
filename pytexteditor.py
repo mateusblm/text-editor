@@ -80,16 +80,6 @@ class PyTextEditor:
         self.Label1.configure(font=font9)
         self.Label1.configure(foreground="#ffffff")
         self.Label1.configure(text='''Font Size''')
-
-        self.Spinbox1 = tk.Spinbox(self.top, from_=1.0, to=100.0)
-        self.Spinbox1.place(relx=0.9, rely=0.022, relheight=0.045
-                            , relwidth=0.078)
-        self.Spinbox1.configure(activebackground="#f9f9f9")
-        self.Spinbox1.configure(background="white")
-        self.Spinbox1.configure(font="TkDefaultFont")
-        self.Spinbox1.configure(highlightbackground="black")
-        self.Spinbox1.configure(selectbackground="blue")
-        self.Spinbox1.configure(selectforeground="white")
         self.top.mainloop()
         self.top = tk.Tk
 

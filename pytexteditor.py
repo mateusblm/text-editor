@@ -1,7 +1,6 @@
 import platform
 from tkinter import*
 from tkinter.filedialog import asksaveasfile, askopenfilename
-
 try:
     import Tkinter as tk
 except ImportError:
@@ -25,18 +24,17 @@ class PyTextEditor:
         _compcolor = '#d9d9d9'  # X11 color: 'gray85'
         _ana1color = '#d9d9d9'  # X11 color: 'gray85'
         _ana2color = '#ececec'  # Closest X11 color: 'gray92'
-        font9 = "-family {helvetica} -size 9 -weight bold"
+        font9 = "Arial 9 bold"
 
         self.top = tk.Tk()
         self.top.resizable(False, False)
         self.top.geometry("600x449+654+190")
         self.top.minsize(1, 1)
         self.top.maxsize(1905, 1050)
-        self.top.resizable(1, 1)
+        self.top.resizable(False, False)
         self.top.title("Document")
         self.top.configure(relief="ridge")
         self.top.configure(background="#383838")
-
         self.menubar = tk.Menu(self.top, font="TkMenuFont", bg=_bgcolor, fg=_fgcolor)
         self.top.configure(menu=self.menubar)
 
@@ -44,7 +42,7 @@ class PyTextEditor:
         self.Entry1.place(
             relx=0.02, rely=0.089,height=400, relwidth=0.96)
         self.Entry1.configure(background="#494949")
-        self.Entry1.configure(font="TkFixedFont")
+        self.Entry1.configure(font="Arial 12")
         self.Entry1.configure(foreground="white")
         self.Entry1.configure(relief="flat")
         self.Entry1.configure(selectbackground="white")
@@ -83,14 +81,13 @@ class PyTextEditor:
         self.Button4.configure(foreground="#ffffff")
         self.Button4.configure(relief="flat")
         self.Button4.configure(text='''Open''')
-
+        """ Working on!
         self.Label1 = tk.Label(self.top)
         self.Label1.place(relx=0.8, rely=0.028, height=18, width=59)
         self.Label1.configure(background="#383838")
         self.Label1.configure(font=font9)
         self.Label1.configure(foreground="#ffffff")
         self.Label1.configure(text='''Font Size''')
-
         self.Spinbox1 = tk.Spinbox(self.top, from_=1.0, to=100.0)
         self.Spinbox1.place(relx=0.9, rely=0.022, relheight=0.045
                             , relwidth=0.078)
@@ -100,6 +97,7 @@ class PyTextEditor:
         self.Spinbox1.configure(highlightbackground="black")
         self.Spinbox1.configure(selectbackground="blue")
         self.Spinbox1.configure(selectforeground="white")
+        """
         self.top.mainloop()
         self.top = tk.Tk
 

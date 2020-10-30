@@ -182,7 +182,10 @@ class PyTextEditor:
         except:
             pass
         finally:
-            self.saveplace.close()
+            try:
+                self.saveplace.close()
+            except AttributeError:
+                pass
 
     def Clear(self):
         self.Entry1.delete('1.0', 'end-1c')
@@ -200,7 +203,7 @@ class PyTextEditor:
         return self.exitpage.destroy()
 
     def Exit3(self):
-        self.Save()
+        self.SaveButton()
         self.exitpage.destroy()
 
 

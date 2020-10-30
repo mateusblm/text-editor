@@ -1,5 +1,7 @@
 import platform
 from tkinter import*
+from tkinter.filedialog import asksaveasfile, askopenfilename
+
 try:
     import Tkinter as tk
 except ImportError:
@@ -42,7 +44,7 @@ class PyTextEditor:
         self.Entry1.place(
             relx=0.02, rely=0.089,height=400, relwidth=0.96)
         self.Entry1.configure(background="#494949")
-        self.Entry1.configure(font=font9)
+        self.Entry1.configure(font="TkFixedFont")
         self.Entry1.configure(foreground="white")
         self.Entry1.configure(relief="flat")
         self.Entry1.configure(selectbackground="white")
@@ -58,7 +60,7 @@ class PyTextEditor:
         self.Button1.configure(relief="flat")
         self.Button1.configure(text='''Clear''')
 
-        self.Button2 = tk.Button(self.top, command=self.Save, padx=40, pady=20)
+        self.Button2 = tk.Button(self.top, command=self.SaveButton, padx=40, pady=20)
         self.Button2.place(relx=0.13, rely=0.018, height=28, width=58)
         self.Button2.configure(background="#494949")
         self.Button2.configure(font=font9)
@@ -67,54 +69,39 @@ class PyTextEditor:
         self.Button2.configure(text='''Save''')
 
         self.Button3 = tk.Button(self.top, command=self.Exit)
-        self.Button3.place(relx=0.24, rely=0.018, height=28, width=58)
+        self.Button3.place(relx=0.35, rely=0.018, height=28, width=58)
         self.Button3.configure(background="#ff0000")
         self.Button3.configure(font=font9)
         self.Button3.configure(foreground="#ffffff")
         self.Button3.configure(relief="flat")
         self.Button3.configure(text='''Exit''')
+
+        self.Button4 = tk.Button(self.top, command=self.Open)
+        self.Button4.place(relx=0.24, rely=0.018, height=28, width=58)
+        self.Button4.configure(background="green")
+        self.Button4.configure(font=font9)
+        self.Button4.configure(foreground="#ffffff")
+        self.Button4.configure(relief="flat")
+        self.Button4.configure(text='''Open''')
+
+        self.Label1 = tk.Label(self.top)
+        self.Label1.place(relx=0.8, rely=0.028, height=18, width=59)
+        self.Label1.configure(background="#383838")
+        self.Label1.configure(font=font9)
+        self.Label1.configure(foreground="#ffffff")
+        self.Label1.configure(text='''Font Size''')
+
+        self.Spinbox1 = tk.Spinbox(self.top, from_=1.0, to=100.0)
+        self.Spinbox1.place(relx=0.9, rely=0.022, relheight=0.045
+                            , relwidth=0.078)
+        self.Spinbox1.configure(activebackground="#f9f9f9")
+        self.Spinbox1.configure(background="white")
+        self.Spinbox1.configure(font="TkDefaultFont")
+        self.Spinbox1.configure(highlightbackground="black")
+        self.Spinbox1.configure(selectbackground="blue")
+        self.Spinbox1.configure(selectforeground="white")
         self.top.mainloop()
         self.top = tk.Tk
-
-    def Save(self):
-        _bgcolor = '#d9d9d9'  # X11 color: 'gray85'
-        _fgcolor = '#000000'  # X11 color: 'black'
-        _compcolor = '#d9d9d9'  # X11 color: 'gray85'
-        _ana1color = '#d9d9d9'  # X11 color: 'gray85'
-        _ana2color = '#ececec'  # Closest X11 color: 'gray92'
-        font9 = "-family {helvetica} -size 9 -weight bold"
-
-        self.save = tk.Tk()
-        self.save.resizable(False, False)
-        self.save.geometry("143x132+640+142")
-        self.save.minsize(1, 1)
-        self.save.maxsize(1905, 1050)
-        self.save.resizable(1, 1)
-        self.save.title("")
-        self.save.configure(background="#494949")
-
-        self.LabelSave = tk.Label(self.save)
-        self.LabelSave.place(relx=0.07, rely=0.076, height=18, width=115)
-        self.LabelSave.configure(background="#494949")
-        self.LabelSave.configure(font=font9)
-        self.LabelSave.configure(foreground="#ffffff")
-        self.LabelSave.configure(text='''Archive Name''')
-
-        self.menubar = tk.Menu(self.save, font="TkMenuFont", bg=_bgcolor, fg=_fgcolor)
-        self.save.configure(menu=self.menubar)
-
-        self.EntrySave = tk.Entry(self.save)
-        self.EntrySave.place(relx=0.14, rely=0.303, height=19, relwidth=0.671)
-        self.EntrySave.configure(background="white")
-        self.EntrySave.configure(font="TkFixedFont")
-
-        self.ButtonSave = tk.Button(self.save, command=self.SaveButton)
-        self.ButtonSave.place(relx=0.21, rely=0.53, height=28, width=73)
-        self.ButtonSave.configure(background="#878787")
-        self.ButtonSave.configure(font=font9)
-        self.ButtonSave.configure(foreground="#ffffff")
-        self.ButtonSave.configure(relief="flat")
-        self.ButtonSave.configure(text='''Save''')
 
     def ExitPage(self):
         _bgcolor = '#d9d9d9'  # X11 color: 'gray85'
@@ -177,18 +164,25 @@ class PyTextEditor:
         self.LabelExit2.configure(foreground="#ffffff")
         self.LabelExit2.configure(text='''If you don't save, all data will be lost''')
 
+    def Open(self):
+        self.openFileName = askopenfilename(filetypes=(("*", "*.txt"), ("All files", "*.*")))
+        self.Entry1.delete("1.0", END)
+        archive = open(self.openFileName)
+        for line in archive:
+            self.Entry1.insert(INSERT, line)
+        archive.close()
+
     def SaveButton(self):
         try:
-            s = str(self.EntrySave.get())
-            s += ".txt"
-            with open(s, "a+") as text:
-                text.write(self.Entry1.get('1.0', 'end-1c') + "\n")
-                self.condicsave = True
-                self.save.destroy()
+            self.saveplace = asksaveasfile(mode='w', defaultextension=".txt")
+            text = (self.Entry1.get('1.0', 'end-1c') + "\n")
+            self.saveplace.write(text)
+            self.condicsave = True
+            self.saveplace.destroy()
         except:
             pass
         finally:
-            text.close()
+            self.saveplace.close()
 
     def Clear(self):
         self.Entry1.delete('1.0', 'end-1c')
@@ -318,4 +312,3 @@ def _on_shiftmouse(event, widget):
 
 
 PyTextEditor()
-

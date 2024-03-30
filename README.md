@@ -14,17 +14,20 @@ Pré-requisitos
 Antes de começar, você precisará ter o Python instalado em sua máquina. Este projeto foi desenvolvido utilizando o Python 3.8. Além disso, você precisará da biblioteca PyGame. Ambos podem ser instalados seguindo as instruções abaixo.
 Instalação
 
-    Clone o repositório para a sua máquina local:
+Clone o repositório para a sua máquina local:
 
-git clone https://github.com/seuusuario/snake-game-pygame.git
+    git clone https://github.com/seuusuario/snake-game-pygame.git
 
-    Entre na pasta do projeto:
 
-cd snake-game
 
-    Instale a biblioteca PyGame:
+Entre na pasta do projeto:
 
-python3 -m pip install pygame
+    cd snake-game
+
+Instale a biblioteca PyGame:
+
+    python3 -m pip install pygame
+
 
 Uso
 

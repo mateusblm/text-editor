@@ -16,7 +16,7 @@ Instalação
 
 Clone o repositório para a sua máquina local:
 
-    git clone https://github.com/seuusuario/snake-game-pygame.git
+    git clone https://github.com/mateusblm/snakegame.git
 
 
 
